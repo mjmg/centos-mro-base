@@ -23,6 +23,7 @@ RUN \
 
 # Install R-core dependencies
 RUN \
+  yum install -y java-1.8.0-openjdk-headless && \
   yum deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs yum -y install
 
 # Workaround for old compiler used in Microsoft R Open
