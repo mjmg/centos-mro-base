@@ -1,11 +1,21 @@
 FROM mjmg/centos-supervisor-base:latest
 
-
 # Update System Image and install EPEL
 RUN \
   yum update -y && \
   yum upgrade -y && \
   yum install -y epel-release
+
+# Install Development Tools
+RUN \
+  yum groupinstall -y 'Development Tools'
+
+# Install R-core dependencies
+RUN \
+  yum install -y java-1.8.0-openjdk-headless && \
+  yum deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs yum -y install && \
+  yum erase -y openblas-Rblas libRmath
+
 
 # Get Microsoft R Open
 RUN \
@@ -17,14 +27,6 @@ RUN \
 RUN \
   /tmp/microsoft-r-open/install.sh -a -u
 
-# Install Development Tools
-RUN \
-  yum groupinstall -y 'Development Tools'
-
-# Install R-core dependencies
-RUN \
-  yum install -y java-1.8.0-openjdk-headless && \
-  yum deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs yum -y install
 
 # Workaround for old compiler used in Microsoft R Open
 RUN \
