@@ -38,4 +38,8 @@ ADD \
 # RUN \
 #   echo "r <- getOption('repos'); r['CRAN'] <- 'https://cloud.r-project.org/'; options(repos = r);" > ~/.Rprofile
 
+# Build packages with multiple threads
+RUN \
+  MAKE="make $(nproc)"
+
 CMD "/bin/bash"
