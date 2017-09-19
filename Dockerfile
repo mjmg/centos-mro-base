@@ -30,9 +30,9 @@ RUN \
 
 # Workaround for Microsoft R Open 3.4.1 installing packages under 3.3 subdirectory
 RUN \
-  rm /usr/lib64/microsoft-r/3.4/lib64/R/etc/Makeconf
+  rm /usr/lib64/microsoft-r/3.4.1/lib64/R/etc/Makeconf
 ADD \
-  Makeconf /usr/lib64/microsoft-r/3.4/lib64/R/etc/Makeconf
+  Makeconf /usr/lib64/microsoft-r/3.4.1/lib64/R/etc/Makeconf
 
 # Setup default CRAN repo, otherwise default MRAN repo snapshot is used
 # RUN \
