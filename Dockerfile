@@ -20,15 +20,15 @@ RUN \
 # Get Microsoft R Open
 RUN \
   cd /tmp/ && \
-  wget https://mran.microsoft.com/install/mro/3.4.0/microsoft-r-open-3.4.0.tar.gz && \
-  tar -xvzf microsoft-r-open-3.4.0.tar.gz
+  wget https://mran.microsoft.com/install/mro/3.4.1/microsoft-r-open-3.4.1.tar.gz && \
+  tar -xvzf microsoft-r-open-3.4.1.tar.gz
 
 # Unattended install of MRO
 RUN \
   /tmp/microsoft-r-open/install.sh -a -u
 
 
-# Workaround for Microsoft R Open 3.4.0
+# Workaround for Microsoft R Open 3.4.1 installing packages under 3.3 subdirectory
 RUN \
   rm /usr/lib64/microsoft-r/3.4/lib64/R/etc/Makeconf
 ADD \
