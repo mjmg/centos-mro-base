@@ -28,11 +28,11 @@ RUN \
   /tmp/microsoft-r-open/install.sh -a -u
 
 
-# Workaround for Microsoft R Open 3.4.1 installing packages under 3.3 subdirectory
+# Workaround for Microsoft R Open 3.4.1 CXX11 errors
 RUN \
-  rm /usr/lib64/microsoft-r/3.4.1/lib64/R/etc/Makeconf
+  rm /opt/microsoft/ropen/3.4.1/lib64/R/etc/Makeconf
 ADD \
-  Makeconf /usr/lib64/microsoft-r/3.4.1/lib64/R/etc/Makeconf
+  Makeconf /opt/microsoft/ropen/3.4.1/lib64/R/etc/Makeconf
 
 # Setup default CRAN repo, otherwise default MRAN repo snapshot is used
 # RUN \
