@@ -1,6 +1,6 @@
 FROM mjmg/centos-supervisor-base:latest
 
-ENV MRO_VERSION 3.4.2
+ENV MRO_VERSION 3.4.1
 
 # Update System Image and install EPEL
 RUN \
@@ -31,10 +31,10 @@ RUN \
 
 
 # Workaround for Microsoft R Open 3.4.X CXX11 errors
-#RUN \
-#  rm /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
-#ADD \
-#  Makeconf /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
+RUN \
+  rm /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
+ADD \
+  Makeconf /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
 
 # Setup default CRAN repo, otherwise default MRAN repo snapshot is used
 # RUN \
