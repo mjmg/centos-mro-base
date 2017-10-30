@@ -4,7 +4,7 @@
 #
 # R was configured using the following call
 # (not including env. vars and site configuration)
-# configure  '--verbose' '--with-x=yes' '--prefix=/builddir/target/R/Linux' '--enable-R-shlib' '--enable-BLAS-shlib' '--enable-memory-profiling' '--with-libpng' '--with-ICU' '--with-jpeglib' '--disable-rpath' '--with-tcltk' '--with-tcl-config=/builddir/vendor/build/lib/tclConfig.sh' '--with-tk-config=/builddir/vendor/build/lib/tkConfig.sh' 'TCLTK_LIBS=-pthread -lz -lX11 -lXft -ltcl8.6 -ltk8.6 -lz' 'TCLTK_CPPFLAGS=-pthread' 'PKG_CONFIG_PATH=/builddir/vendor/build/lib/pkgconfig' 'CFLAGS=-I/builddir/vendor/build/include -DU_STATIC_IMPLEMENTATION -O2 -g' 'LDFLAGS=-L/builddir/vendor/build/lib' 'LIBS=-licui18n -licuuc -licudata -lstdc++' 'CPPFLAGS=-I/builddir/vendor/build/include -DU_STATIC_IMPLEMENTATION' 'CXXFLAGS=-I/builddir/vendor/build/include -DU_STATIC_IMPLEMENTATIN -O2 -g'
+# configure 
 
 ## This fails if it contains spaces, or if it is quoted
 include $(R_SHARE_DIR)/make/vars.mk
@@ -13,17 +13,29 @@ AR = ar
 BLAS_LIBS = -L$(R_HOME)/lib$(R_ARCH) -lRblas
 C_VISIBILITY = -fvisibility=hidden
 CC = gcc -std=gnu99
-CFLAGS = -DU_STATIC_IMPLEMENTATION -O2 -g $(LTO)
+CFLAGS = -DU_STATIC_IMPLEMENTATION -g -O2 $(LTO)
 CPICFLAGS = -fpic
-CPPFLAGS = -DU_STATIC_IMPLEMENTATION
-CXX = g++
+CPPFLAGS = -I/usr/local/include -DU_STATIC_IMPLEMENTATION
+CXX = g++ 
 CXXCPP = $(CXX) -E
-CXXFLAGS = -DU_STATIC_IMPLEMENTATIN -O2 -g $(LTO)
+CXXFLAGS = -DU_STATIC_IMPLEMENTATION -g -O2 $(LTO)
 CXXPICFLAGS = -fpic
+CXX98 = g++
+CXX98FLAGS = -DU_STATIC_IMPLEMENTATION -g -O2
+CXX98PICFLAGS = -fpic
+CXX98STD = 
 CXX11 = g++
-CXX11FLAGS = -O2 -g $(LTO)
-CXX11PICFLAGS = -fPIC
-CXX11STD = -std=c++11
+CXX11FLAGS = -DU_STATIC_IMPLEMENTATION -g -O2
+CXX11PICFLAGS = -fpic
+CXX11STD = -std=gnu++11
+CXX14 = 
+CXX14FLAGS = 
+CXX14PICFLAGS = 
+CXX14STD = 
+CXX17 = 
+CXX17FLAGS = 
+CXX17PICFLAGS = 
+CXX17STD = 
 DYLIB_EXT = .so
 DYLIB_LD = $(CC)
 DYLIB_LDFLAGS = -shared -fopenmp# $(CFLAGS) $(CPICFLAGS)
@@ -35,38 +47,38 @@ ECHO_T =
 ## NB, set FC before F77 as on Solaris make, setting FC sets F77
 FC = gfortran
 FCFLAGS = -g -O2 $(LTO)
-## additional libs needed when linking with $(FC), e.g. on Solaris
+## additional libs needed when linking with $(FC), e.g. on some Oracle compilers
 FCLIBS = 
 F77 = gfortran
 F77_VISIBILITY = -fvisibility=hidden
 FFLAGS = -g -O2 $(LTO)
-FLIBS =  -lgfortran -lm
+FLIBS =  -lgfortran -lm -lquadmath
 FCPICFLAGS = -fpic
 FPICFLAGS = -fpic
 FOUNDATION_CPPFLAGS = 
 FOUNDATION_LIBS = 
-JAR = 
-JAVA = 
-JAVAC = 
-JAVAH = 
+JAR = /usr/bin/jar
+JAVA = /usr/bin/java
+JAVAC = /usr/bin/javac
+JAVAH = /usr/bin/javah
 ## JAVA_HOME might be used in the next three.  
 ## They are for packages 'JavaGD' and 'rJava'
-JAVA_HOME = 
-JAVA_CPPFLAGS = 
-JAVA_LIBS = 
-JAVA_LD_LIBRARY_PATH = 
+JAVA_HOME = /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.102-4.b14.el7.x86_64/jre
+JAVA_CPPFLAGS = -I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/linux
+JAVA_LIBS = -L$(JAVA_HOME)/lib/amd64/server -ljvm
+JAVA_LD_LIBRARY_PATH = $(JAVA_HOME)/lib/amd64/server
 LAPACK_LIBS = -L$(R_HOME)/lib$(R_ARCH) -lRlapack
 ## we only need this is if it is external, as otherwise link to R
 LIBINTL= 
 LIBM = -lm
-LIBR0 = -L$(R_HOME)/lib$(R_ARCH)
-LIBR1 = -lR
-LIBR = -L$(R_HOME)/lib$(R_ARCH) -lR
-LIBS =  -lpcre -llzma -lbz2 -lz -lrt -ldl -lm -licui18n -licuuc -licudata -lstdc++ -licuuc -licui18n
+LIBR0 = 
+LIBR1 = 
+LIBR =  
+LIBS =  -lpcre -llzma -lbz2 -lz -lrt -ldl -lm -licuuc -licui18n
 ## needed by R CMD config
 LIBnn = lib64
 LIBTOOL = $(SHELL) "$(R_HOME)/bin/libtool"
-LDFLAGS =
+LDFLAGS = -L/usr/local/lib64
 LTO = 
 ## needed to build applications linking to static libR
 MAIN_LD = $(CC)
@@ -80,14 +92,20 @@ OBJCXX =
 R_ARCH = 
 RANLIB = ranlib
 SAFE_FFLAGS = -g -O2 -ffloat-store
-SED = sed
-SHELL = sh
+SED = /usr/bin/sed
+SHELL = /bin/sh
 SHLIB_CFLAGS = 
 SHLIB_CXXFLAGS = 
 SHLIB_CXXLD = $(CXX)
 SHLIB_CXXLDFLAGS = -shared
+SHLIB_CXX98LD = $(CXX98) $(CXX98STD)
+SHLIB_CXX98LDFLAGS = -shared
 SHLIB_CXX11LD = $(CXX11) $(CXX11STD)
 SHLIB_CXX11LDFLAGS = -shared
+SHLIB_CXX14LD = $(CXX14) $(CXX14STD)
+SHLIB_CXX14LDFLAGS = -shared
+SHLIB_CXX17LD = $(CXX17) $(CXX17STD)
+SHLIB_CXX17LDFLAGS = -shared
 SHLIB_EXT = .so
 SHLIB_FCLD = $(FC)
 SHLIB_FCLDFLAGS = -shared
@@ -104,12 +122,21 @@ SHLIB_OPENMP_FCFLAGS = -fopenmp
 SHLIB_OPENMP_FFLAGS = -fopenmp
 STRIP_LIBS = strip --strip-unneeded
 STRIP_STATIC_LIBS = strip --strip-debug
-TCLTK_CPPFLAGS = -pthread 
-TCLTK_LIBS = -pthread -lz -lX11 -lXft -ltcl8.6 -ltk8.6 -lz
-YACC = bison -y
+TCLTK_CPPFLAGS = -I/usr/include -I/usr/include 
+TCLTK_LIBS = -L/usr/lib64 -ltcl8.5 -L/usr/lib64 -ltk8.5 -lX11
+YACC = yacc
+
+## legacy
+CXX1X = g++
+CXX1XFLAGS = -g -O2
+CXX1XPICFLAGS = -fpic
+CXX1XSTD = -std=gnu++11
+SHLIB_CXX1XLD = $(CXX11) $(CXX11STD)
+SHLIB_CXX1XLDFLAGS = -shared
+
 
 ## for linking to libR.a
-STATIC_LIBR = # -Wl,--whole-archive "$(R_HOME)/lib$(R_ARCH)/libR.a" -Wl,--no-whole-archive $(BLAS_LIBS) $(FLIBS)  $(LIBINTL) -lreadline -lncurses  $(LIBS)
+STATIC_LIBR = # -Wl,--whole-archive "$(R_HOME)/lib$(R_ARCH)/libR.a" -Wl,--no-whole-archive $(BLAS_LIBS) $(FLIBS)  $(LIBINTL) -lreadline  $(LIBS)
 
 R_XTRA_CFLAGS = 
 R_XTRA_CPPFLAGS =  -I$(R_INCLUDE_DIR) -DNDEBUG
@@ -117,7 +144,7 @@ R_XTRA_CXXFLAGS =
 R_XTRA_FFLAGS = 
 
 ALL_CFLAGS = $(R_XTRA_CFLAGS) $(PKG_CFLAGS) $(CPICFLAGS) $(SHLIB_CFLAGS) $(CFLAGS)
-ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(PKG_CPPFLAGS) $(CPPFLAGS) $(CLINK_CPPFLAGS)
+ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(PKG_CPPFLAGS) $(CLINK_CPPFLAGS) $(CPPFLAGS)
 ALL_CXXFLAGS = $(R_XTRA_CXXFLAGS) $(PKG_CXXFLAGS) $(CXXPICFLAGS) $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ALL_OBJCFLAGS = $(PKG_OBJCFLAGS) $(CPICFLAGS) $(SHLIB_CFLAGS) $(OBJCFLAGS)
 ALL_OBJCXXFLAGS = $(PKG_OBJCXXFLAGS) $(CXXPICFLAGS) $(SHLIB_CXXFLAGS) $(OBJCXXFLAGS)
