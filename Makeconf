@@ -4,7 +4,7 @@
 #
 # R was configured using the following call
 # (not including env. vars and site configuration)
-# configure 
+# configure '--verbose' '--with-x=yes' '--prefix=/builddir/target/R/Linux' '--enable-R-shlib' '--enable-BLAS-shlib' '--enable-memory-profiling' '--with-libpng' '--with-ICU' '--with-jpeglib' '--disable-rpath' '--with-tcltk' '--with-tcl-config=/builddir/vendor/build/lib/tclConfig.sh' '--with-tk-config=/builddir/vendor/build/lib/tkConfig.sh' 'TCLTK_LIBS=-pthread -lz -lX11 -lXft -ltcl8.6 -ltk8.6 -lz' 'TCLTK_CPPFLAGS=-pthread' 'PKG_CONFIG_PATH=/builddir/vendor/build/lib/pkgconfig' 'CFLAGS=-I/builddir/vendor/build/include -DU_STATIC_IMPLEMENTATION -O2 -g' 'LDFLAGS=-L/builddir/vendor/build/lib' 'LIBS=-licui18n -licuuc -licudata -lstdc++' 'CPPFLAGS=-I/builddir/vendor/build/include -DU_STATIC_IMPLEMENTATION' 'CXXFLAGS=-I/builddir/vendor/build/include -DU_STATIC_IMPLEMENTATIN -O2 -g'
 
 ## This fails if it contains spaces, or if it is quoted
 include $(R_SHARE_DIR)/make/vars.mk
