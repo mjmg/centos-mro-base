@@ -13,29 +13,17 @@ AR = ar
 BLAS_LIBS = -L$(R_HOME)/lib$(R_ARCH) -lRblas
 C_VISIBILITY = -fvisibility=hidden
 CC = gcc -std=gnu99
-CFLAGS = -DU_STATIC_IMPLEMENTATION -g -O2 $(LTO)
+CFLAGS = -DU_STATIC_IMPLEMENTATION -O2 -g $(LTO)
 CPICFLAGS = -fpic
-CPPFLAGS = -I/usr/local/include -DU_STATIC_IMPLEMENTATION
-CXX = g++ 
+CPPFLAGS = -DU_STATIC_IMPLEMENTATION
+CXX = g++
 CXXCPP = $(CXX) -E
-CXXFLAGS = -DU_STATIC_IMPLEMENTATION -g -O2 $(LTO)
+CXXFLAGS = -DU_STATIC_IMPLEMENTATIN -O2 -g $(LTO)
 CXXPICFLAGS = -fpic
-CXX98 = g++
-CXX98FLAGS = -DU_STATIC_IMPLEMENTATION -g -O2
-CXX98PICFLAGS = -fpic
-CXX98STD = 
 CXX11 = g++
-CXX11FLAGS = -DU_STATIC_IMPLEMENTATION -g -O2
-CXX11PICFLAGS = -fpic
-CXX11STD = -std=gnu++11
-CXX14 = 
-CXX14FLAGS = 
-CXX14PICFLAGS = 
-CXX14STD = 
-CXX17 = 
-CXX17FLAGS = 
-CXX17PICFLAGS = 
-CXX17STD = 
+CXX11FLAGS = -DU_STATIC_IMPLEMENTATION -O2 -g $(LTO)
+CXX11PICFLAGS = -fPIC
+CXX11STD = -std=c++11
 DYLIB_EXT = .so
 DYLIB_LD = $(CC)
 DYLIB_LDFLAGS = -shared -fopenmp# $(CFLAGS) $(CPICFLAGS)
@@ -47,38 +35,38 @@ ECHO_T =
 ## NB, set FC before F77 as on Solaris make, setting FC sets F77
 FC = gfortran
 FCFLAGS = -g -O2 $(LTO)
-## additional libs needed when linking with $(FC), e.g. on some Oracle compilers
+## additional libs needed when linking with $(FC), e.g. on Solaris
 FCLIBS = 
 F77 = gfortran
 F77_VISIBILITY = -fvisibility=hidden
 FFLAGS = -g -O2 $(LTO)
-FLIBS =  -lgfortran -lm -lquadmath
+FLIBS =  -lgfortran -lm
 FCPICFLAGS = -fpic
 FPICFLAGS = -fpic
 FOUNDATION_CPPFLAGS = 
 FOUNDATION_LIBS = 
-JAR = /usr/bin/jar
-JAVA = /usr/bin/java
-JAVAC = /usr/bin/javac
-JAVAH = /usr/bin/javah
+JAR = 
+JAVA = 
+JAVAC = 
+JAVAH = 
 ## JAVA_HOME might be used in the next three.  
 ## They are for packages 'JavaGD' and 'rJava'
-JAVA_HOME = /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.102-4.b14.el7.x86_64/jre
-JAVA_CPPFLAGS = -I$(JAVA_HOME)/../include -I$(JAVA_HOME)/../include/linux
-JAVA_LIBS = -L$(JAVA_HOME)/lib/amd64/server -ljvm
-JAVA_LD_LIBRARY_PATH = $(JAVA_HOME)/lib/amd64/server
+JAVA_HOME = 
+JAVA_CPPFLAGS = 
+JAVA_LIBS = 
+JAVA_LD_LIBRARY_PATH = 
 LAPACK_LIBS = -L$(R_HOME)/lib$(R_ARCH) -lRlapack
 ## we only need this is if it is external, as otherwise link to R
 LIBINTL= 
 LIBM = -lm
-LIBR0 = 
-LIBR1 = 
-LIBR =  
-LIBS =  -lpcre -llzma -lbz2 -lz -lrt -ldl -lm -licuuc -licui18n
+LIBR0 = -L$(R_HOME)/lib$(R_ARCH)
+LIBR1 = -lR
+LIBR = -L$(R_HOME)/lib$(R_ARCH) -lR
+LIBS =  -lpcre -llzma -lbz2 -lz -lrt -ldl -lm -licui18n -licuuc -licudata -lstdc++ -licuuc -licui18n
 ## needed by R CMD config
 LIBnn = lib64
 LIBTOOL = $(SHELL) "$(R_HOME)/bin/libtool"
-LDFLAGS = -L/usr/local/lib64
+LDFLAGS =
 LTO = 
 ## needed to build applications linking to static libR
 MAIN_LD = $(CC)
@@ -92,20 +80,14 @@ OBJCXX =
 R_ARCH = 
 RANLIB = ranlib
 SAFE_FFLAGS = -g -O2 -ffloat-store
-SED = /usr/bin/sed
-SHELL = /bin/sh
+SED = sed
+SHELL = sh
 SHLIB_CFLAGS = 
 SHLIB_CXXFLAGS = 
 SHLIB_CXXLD = $(CXX)
 SHLIB_CXXLDFLAGS = -shared
-SHLIB_CXX98LD = $(CXX98) $(CXX98STD)
-SHLIB_CXX98LDFLAGS = -shared
 SHLIB_CXX11LD = $(CXX11) $(CXX11STD)
 SHLIB_CXX11LDFLAGS = -shared
-SHLIB_CXX14LD = $(CXX14) $(CXX14STD)
-SHLIB_CXX14LDFLAGS = -shared
-SHLIB_CXX17LD = $(CXX17) $(CXX17STD)
-SHLIB_CXX17LDFLAGS = -shared
 SHLIB_EXT = .so
 SHLIB_FCLD = $(FC)
 SHLIB_FCLDFLAGS = -shared
@@ -122,21 +104,12 @@ SHLIB_OPENMP_FCFLAGS = -fopenmp
 SHLIB_OPENMP_FFLAGS = -fopenmp
 STRIP_LIBS = strip --strip-unneeded
 STRIP_STATIC_LIBS = strip --strip-debug
-TCLTK_CPPFLAGS = -I/usr/include -I/usr/include 
-TCLTK_LIBS = -L/usr/lib64 -ltcl8.5 -L/usr/lib64 -ltk8.5 -lX11
-YACC = yacc
-
-## legacy
-CXX1X = g++
-CXX1XFLAGS = -g -O2
-CXX1XPICFLAGS = -fpic
-CXX1XSTD = -std=gnu++11
-SHLIB_CXX1XLD = $(CXX11) $(CXX11STD)
-SHLIB_CXX1XLDFLAGS = -shared
-
+TCLTK_CPPFLAGS = -pthread 
+TCLTK_LIBS = -pthread -lz -lX11 -lXft -ltcl8.6 -ltk8.6 -lz
+YACC = bison -y
 
 ## for linking to libR.a
-STATIC_LIBR = # -Wl,--whole-archive "$(R_HOME)/lib$(R_ARCH)/libR.a" -Wl,--no-whole-archive $(BLAS_LIBS) $(FLIBS)  $(LIBINTL) -lreadline  $(LIBS)
+STATIC_LIBR = # -Wl,--whole-archive "$(R_HOME)/lib$(R_ARCH)/libR.a" -Wl,--no-whole-archive $(BLAS_LIBS) $(FLIBS)  $(LIBINTL) -lreadline -lncurses  $(LIBS)
 
 R_XTRA_CFLAGS = 
 R_XTRA_CPPFLAGS =  -I$(R_INCLUDE_DIR) -DNDEBUG
@@ -144,7 +117,7 @@ R_XTRA_CXXFLAGS =
 R_XTRA_FFLAGS = 
 
 ALL_CFLAGS = $(R_XTRA_CFLAGS) $(PKG_CFLAGS) $(CPICFLAGS) $(SHLIB_CFLAGS) $(CFLAGS)
-ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(PKG_CPPFLAGS) $(CLINK_CPPFLAGS) $(CPPFLAGS)
+ALL_CPPFLAGS = $(R_XTRA_CPPFLAGS) $(PKG_CPPFLAGS) $(CPPFLAGS) $(CLINK_CPPFLAGS)
 ALL_CXXFLAGS = $(R_XTRA_CXXFLAGS) $(PKG_CXXFLAGS) $(CXXPICFLAGS) $(SHLIB_CXXFLAGS) $(CXXFLAGS)
 ALL_OBJCFLAGS = $(PKG_OBJCFLAGS) $(CPICFLAGS) $(SHLIB_CFLAGS) $(OBJCFLAGS)
 ALL_OBJCXXFLAGS = $(PKG_OBJCXXFLAGS) $(CXXPICFLAGS) $(SHLIB_CXXFLAGS) $(OBJCXXFLAGS)

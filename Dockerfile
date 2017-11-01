@@ -1,6 +1,6 @@
 FROM mjmg/centos-supervisor-base:latest
 
-ENV MRO_VERSION 3.4.2
+ENV MRO_VERSION 3.4.1
 
 # Update System Image and install EPEL
 RUN \
