@@ -1,6 +1,6 @@
 FROM mjmg/centos-supervisor-base:latest
 
-ENV MRO_VERSION 3.4.1
+ENV MRO_VERSION 3.4.3
 
 # Update System Image and install EPEL
 RUN \
@@ -30,7 +30,7 @@ RUN \
   /tmp/microsoft-r-open/install.sh -a -u
 
 
-# Workaround for Microsoft R Open 3.4.X CXX11 errors
+# Workaround for Microsoft R Open 3.4.3 errors
 RUN \
   rm /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
 ADD \
