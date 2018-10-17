@@ -1,6 +1,7 @@
 FROM mjmg/centos-supervisor-base:latest
 
-ENV MRO_VERSION 3.4.3
+ENV MRO_VERSION 3.5.1
+
 
 # Update System Image and install EPEL
 RUN \
@@ -8,9 +9,11 @@ RUN \
   yum upgrade -y && \
   yum install -y epel-release
 
+
 # Install Development Tools
 RUN \
   yum groupinstall -y 'Development Tools'
+
 
 # Install R-core dependencies
 RUN \
@@ -25,23 +28,19 @@ RUN \
   wget https://mran.blob.core.windows.net/install/mro/$MRO_VERSION/microsoft-r-open-$MRO_VERSION.tar.gz && \
   tar -xvzf microsoft-r-open-$MRO_VERSION.tar.gz
 
+
 # Unattended install of MRO
 RUN \
   /tmp/microsoft-r-open/install.sh -a -u
 
 
-# Workaround for Microsoft R Open 3.4.3 errors
-RUN \
-  rm /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
-ADD \
-  Makeconf /opt/microsoft/ropen/$MRO_VERSION/lib64/R/etc/Makeconf
-
 # Setup default CRAN repo, otherwise default MRAN repo snapshot is used
 # RUN \
 #   echo "r <- getOption('repos'); r['CRAN'] <- 'https://cloud.r-project.org/'; options(repos = r);" > ~/.Rprofile
 
+
 # Build packages with multiple threads
-RUN \
-  MAKE="make $(nproc)"
+#RUN \
+#  MAKE="make $(nproc)"
 
 CMD "/bin/bash"
