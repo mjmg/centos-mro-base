@@ -16,7 +16,7 @@ RUN \
 
 # Install R-core dependencies
 RUN \
-  dnf --allowerasing install -y libcurl 
+  dnf install -y --allowerasing curl libcurl
   #&& \
 RUN \  
   dnf install -y java-11-openjdk-devel && \
