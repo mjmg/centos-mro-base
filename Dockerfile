@@ -16,7 +16,7 @@ RUN \
 
 # Install R-core dependencies
 RUN \
-  yum install -y java-11-openjdk-devel --allowerasing && \
+  yum install --allowerasing -y java-11-openjdk-devel  && \
   yum deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs yum -y install && \
   yum erase -y openblas-Rblas libRmath
 
