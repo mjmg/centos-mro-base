@@ -5,20 +5,20 @@ ENV MRO_VERSION 3.5.3
 
 # Update System Image
 RUN \
-  yum update -y && \
-  yum upgrade -y 
+  dnf update -y && \
+  dnf upgrade -y 
  
 
 # Install Development Tools
 RUN \
-  yum groupinstall -y 'Development Tools'
+  dnf groupinstall -y 'Development Tools'
 
 
 # Install R-core dependencies
 RUN \
-  yum install --allowerasing -y java-11-openjdk-devel  && \
-  yum deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs yum -y install && \
-  yum erase -y openblas-Rblas libRmath
+  dnf install --allowerasing -y java-11-openjdk-devel  && \
+  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf -y install && \
+  dnf erase -y openblas-Rblas libRmath
 
 
 # Get Microsoft R Open
