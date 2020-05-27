@@ -16,7 +16,9 @@ RUN \
 
 # Install R-core dependencies
 RUN \
-  dnf --allowerasing install -y libcurl && \
+  dnf --allowerasing install -y libcurl 
+  #&& \
+RUN \  
   dnf install -y java-11-openjdk-devel && \
   dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf --allowerasing -y install  && \
   dnf erase -y openblas-Rblas libRmath
