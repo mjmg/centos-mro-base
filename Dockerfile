@@ -22,7 +22,7 @@ RUN \
   dnf install -y java-11-openjdk-devel 
   #&& \
 RUN \    
-  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf -y --allowerasing --skip-broken install  && \
+  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf -y --allowerasing --skip-broken install  
 RUN \    
   dnf erase -y openblas-Rblas libRmath
 
