@@ -19,8 +19,11 @@ RUN \
   dnf install -y --allowerasing curl libcurl
   #&& \
 RUN \  
-  dnf install -y --nobest --skip-broken java-11-openjdk-devel && \
-  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf --allowerasing -y install  && \
+  dnf install -y --nobest --skip-broken java-11-openjdk-devel 
+  #&& \
+RUN \    
+  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf -y install  && \
+RUN \    
   dnf erase -y openblas-Rblas libRmath
 
 
