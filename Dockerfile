@@ -30,7 +30,7 @@ RUN \
 # Get Microsoft R Open
 RUN \
   cd /tmp/ && \
-  wget https://mran.blob.core.windows.net/install/mro/$MRO_VERSION/microsoft-r-open-$MRO_VERSION.tar.gz && \
+  wget https://mran.blob.core.windows.net/install/mro/$MRO_VERSION/rhel/microsoft-r-open-$MRO_VERSION.tar.gz && \
   tar -xvzf microsoft-r-open-$MRO_VERSION.tar.gz
 
 
