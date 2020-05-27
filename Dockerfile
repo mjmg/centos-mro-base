@@ -16,13 +16,13 @@ RUN \
 
 # Install R-core dependencies
 RUN \
-  dnf install -y --allowerasing curl libcurl
+  dnf install -y --allowerasing libcurl
   #&& \
 RUN \  
-  dnf install -y --nobest --skip-broken java-11-openjdk-devel 
+  dnf install -y java-11-openjdk-devel 
   #&& \
 RUN \    
-  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf -y --allowerasing install  && \
+  dnf deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs dnf -y --allowerasing --skip-broken install  && \
 RUN \    
   dnf erase -y openblas-Rblas libRmath
 
