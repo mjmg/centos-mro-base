@@ -3,12 +3,11 @@ FROM mjmg/centos-supervisor-base:latest
 ENV MRO_VERSION 3.5.3
 
 
-# Update System Image and install EPEL
+# Update System Image
 RUN \
   yum update -y && \
-  yum upgrade -y && \
-  yum install -y epel-release
-
+  yum upgrade -y 
+ 
 
 # Install Development Tools
 RUN \
@@ -17,7 +16,7 @@ RUN \
 
 # Install R-core dependencies
 RUN \
-  yum install -y java-1.8.0-openjdk-headless && \
+  yum install -y java-11-openjdk-devel && \
   yum deplist R-core | awk '/provider:/ {print $2}' | sort -u | xargs yum -y install && \
   yum erase -y openblas-Rblas libRmath
 
